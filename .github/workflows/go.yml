@@ -5,24 +5,29 @@ name: Go
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
-
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
+
     steps:
-    - uses: actions/checkout@v3
+      - name: Checkout Repositorio
+        uses: actions/checkout@v2
 
-    - name: Set up Go
-      uses: actions/setup-go@v4
-      with:
-        go-version: '1.20'
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: "1.21.6"
 
-    - name: Build
-      run: go build -v ./...
+      - name: Build
+        run: go build -o repositorio-demon -v ./
 
-    - name: Test
-      run: go test -v ./...
+
+      - name: Stop Service
+        run: systemctl --user stop factured-despliegue.service
+
+      - name: Start Service
+        run: systemctl --user start factured-despliegue.service
+
