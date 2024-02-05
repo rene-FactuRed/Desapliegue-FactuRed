@@ -13,7 +13,7 @@ func main() {
 	// Define una ruta para la raíz que responde con "Hola, Mundo!"
 	r.GET("/", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
-			"message": "¡Hola, Mundo! y esto lo escribio samuel el perro de san miguel",
+			"message": "¡Hola, Mundo! y esto lo escribio samuel el perro de chalate",
 		})
 	})
 
